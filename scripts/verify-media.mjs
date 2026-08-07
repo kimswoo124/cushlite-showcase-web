@@ -60,6 +60,20 @@ for (const product of PRODUCTS) {
   }
 }
 
+// 앱 간 이동 링크(스위처)도 검증 대상에 넣는다.
+for (const product of PRODUCTS) references.add(`/${product}/`);
+
+// 배포 주소를 소스에 하드코딩하면 주소가 바뀔 때 조용히 죽는다 — 있으면 실패시킨다.
+const hardcoded = [];
+for (const product of PRODUCTS) {
+  for (const file of await collectFiles(path.resolve(`client-${product}/src`), /\.(js|jsx)$/)) {
+    const source = await readFile(file, 'utf8');
+    for (const match of source.matchAll(/["'`](https?:\/\/dcsai\.fnf\.co\.kr\/[^"'`]*)["'`]/g)) {
+      hardcoded.push(`${path.basename(file)} (client-${product}): ${match[1]}`);
+    }
+  }
+}
+
 const targets = [...references].sort();
 console.log(`검증 대상 ${targets.length}개 · base=${BASE_URL}\n`);
 
@@ -93,12 +107,18 @@ for (const target of targets) {
 
 console.log(`영상 ${videoCount}개 / 이미지 ${imageCount}개 / 정적 자산 ${targets.length - videoCount - imageCount}개`);
 
+if (hardcoded.length) {
+  console.error(`\n❌ 배포 주소 하드코딩 ${hardcoded.length}건 (상대 경로로 바꾸세요):`);
+  for (const item of hardcoded) console.error(`  ${item}`);
+}
+
 if (failures.length) {
   console.error(`\n❌ 실패 ${failures.length}건:`);
   for (const failure of failures) {
     console.error(`  [${failure.status}] ${failure.target} — ${failure.reason}`);
   }
-  process.exit(1);
 }
+
+if (failures.length || hardcoded.length) process.exit(1);
 
 console.log('\n✅ 전부 정상 — 깨진 경로 없음');

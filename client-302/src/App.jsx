@@ -108,7 +108,9 @@ function createCopyTimeline(copyItems, variant = 'default') {
   return timeline;
 }
 
-const SIBLING_SHOWCASE_URL = 'https://dcsai.fnf.co.kr/server/quick-dashboard/cushlite-702-showcase';
+// 같은 앱 서버가 /302/, /702/ 를 함께 서빙하므로 루트 기준 상대 경로로 이동한다.
+// (외부 절대 URL 을 쓰면 배포 주소가 바뀔 때마다 링크가 죽는다)
+const SIBLING_SHOWCASE_URL = '/702/';
 
 const sectionNavigation = [
   { id: 'overview', label: '제품 소개', shortLabel: '제품', href: '#top', from: 0, to: 1 },

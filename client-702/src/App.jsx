@@ -13,7 +13,9 @@ import { assetPath, colorways, features, priceBenchmarks } from './data';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const SIBLING_SHOWCASE_URL = 'https://dcsai.fnf.co.kr/server/quick-dashboard/cushlite-302-showcase';
+// 같은 앱 서버가 /302/, /702/ 를 함께 서빙하므로 루트 기준 상대 경로로 이동한다.
+// (외부 절대 URL 을 쓰면 배포 주소가 바뀔 때마다 링크가 죽는다)
+const SIBLING_SHOWCASE_URL = '/302/';
 
 function Navigation({ progress }) {
   return (
