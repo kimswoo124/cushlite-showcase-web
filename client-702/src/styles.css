@@ -73,6 +73,16 @@ canvas {
   padding-block: clamp(120px, 14vw, 210px);
 }
 
+/* 비교 섹션 하단과 루틴 헤더 상단의 section-pad 가 겹쳐 갭이 두 배가 된다.
+   맞닿는 쪽만 줄여 합계를 적정 여백으로 맞춘다. */
+.price-section.section-pad {
+  padding-bottom: clamp(48px, 5vw, 84px);
+}
+
+.technology-header.section-pad {
+  padding-top: clamp(84px, 9vw, 140px);
+}
+
 .eyebrow {
   margin: 0 0 22px;
   color: var(--blue);
@@ -1493,6 +1503,32 @@ canvas {
 .closing {
   color: var(--ink);
   background: transparent;
+}
+
+.closing-brand {
+  display: grid;
+  gap: 18px;
+  justify-items: center;
+  width: var(--page);
+  margin: 0 auto;
+  padding: clamp(88px, 11vw, 150px) 0 clamp(64px, 8vw, 104px);
+  text-align: center;
+}
+
+.closing-brand p {
+  margin: 0;
+  color: var(--ink);
+  font-size: clamp(1.5rem, 3.4vw, 2.5rem);
+  font-weight: 660;
+  letter-spacing: -0.04em;
+  word-break: keep-all;
+}
+
+.closing-brand span {
+  color: var(--muted);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
 }
 
 .footer-bottom {

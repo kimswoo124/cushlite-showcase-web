@@ -4,8 +4,6 @@ export const assetPath = (path) => {
   const normalizedPath = path.replace(/^\/+/, '');
 
   // 영상·제품 이미지는 저장소에 두지 않고 S3 에 올린 뒤 서버가 중계한다.
-  // (페이지 저장으로 자산이 함께 내려가지 않도록, 또 public 저장소에
-  //  미출시 제품 자산이 남지 않도록)
   // 미디어 경로는 앱 서버 루트 기준이라 BASE_URL 을 붙이지 않는다.
   const media = normalizedPath.match(/(?:^|\/)(video|images)\/(.+)$/);
   if (media) return `/api/media/${PRODUCT}/${media[1]}/${media[2]}`;
@@ -18,10 +16,10 @@ export const priceBenchmarks = [
     brand: 'SERGIO TACCHINI',
     model: 'CUSHLITE 702',
     price: '₩189,000',
-    priceDelta: '비교 기준',
+    priceDelta: 'BALANCED ROUTINE',
     segment: '쿠션·안정 균형형',
     functions: ['듀얼 존 CMEVA', '중족부 브리지', '온코트 ↔ 데일리 연속성'],
-    verdict: '상단 가격대에서 특정 기능의 극대화보다 매일 반복 가능한 균형을 제안합니다.',
+    verdict: '측면 지지, 착지 완충과 전환 안정의 균형으로 매일 자신의 루틴을 지키는 설계입니다.',
     featured: true,
     image: assetPath('assets/images/price/court-linea-colors.webp'),
     imageAlt: '화이트, 아이스 블루, 라임, 핑크 컬러의 CUSHLITE 702 테니스화',
@@ -30,10 +28,10 @@ export const priceBenchmarks = [
     brand: 'NIKE',
     model: 'Vapor Pro 2',
     price: '₩159,000',
-    priceDelta: '− ₩30,000',
+    priceDelta: 'SPEED RESPONSE',
     segment: '스피드·민첩형',
     functions: ['낮은 코트 필링', '경량 어퍼', '빠른 전환 반응'],
-    verdict: '비교군 최저 가격. 쿠셔닝의 양보다 코트 감각과 민첩한 움직임에 우선순위를 둡니다.',
+    verdict: '낮은 코트 감각과 민첩한 전환에 우선순위를 둔 스피드 성향입니다.',
     image: assetPath('assets/images/price/nike-vapor-pro-2.webp'),
     imageAlt: '화이트 컬러 Nike Vapor Pro 2 테니스화',
   },
@@ -41,7 +39,7 @@ export const priceBenchmarks = [
     brand: 'ADIDAS',
     model: 'Barricade 13',
     price: '₩179,000',
-    priceDelta: '− ₩10,000',
+    priceDelta: 'STABILITY',
     segment: '지지·내구형',
     functions: ['측면 지지 구조', '내구성 중심 어퍼', '안정적인 베이스'],
     verdict: '강한 방향 전환과 반복 슬라이드에서 흔들림을 줄이는 안정성 중심의 선택입니다.',
@@ -52,10 +50,10 @@ export const priceBenchmarks = [
     brand: 'ASICS',
     model: 'Gel Resolution 9',
     price: '₩189,000',
-    priceDelta: '동일 가격',
+    priceDelta: 'BASELINE SUPPORT',
     segment: '안정·쿠션 강화형',
     functions: ['후족부 충격 완화', '측면 안정 구조', '넓은 지지 플랫폼'],
-    verdict: '동일 가격대에서 안정성과 충격 완화의 체감 강도를 더 선명하게 가져가는 포지션입니다.',
+    verdict: '베이스라인 좌우 이동의 지지와 착지 완충을 우선하는 포지션입니다.',
     image: assetPath('assets/images/price/asics-gel-resolution-9.webp'),
     imageAlt: '화이트와 블루 컬러 ASICS GEL-RESOLUTION 9 테니스화',
   },
@@ -65,9 +63,9 @@ export const features = [
   {
     id: 'upper',
     name: 'Lateral upper',
-    korean: '측면은 가볍게, 움직임은 단단하게.',
+    korean: '유연하게 반응하고, 중심은 흐트러지지 않도록.',
     body:
-      '측면의 오픈 메쉬는 열을 빠르게 흘려보내고 발의 움직임에 맞춰 유연하게 반응합니다. 힘이 모이는 중족부에는 무봉제 필름 오버레이와 레이스 케이지를 겹쳐, 방향 전환에서도 형태가 흐트러지지 않도록 지지합니다.',
+      '측면의 오픈 메쉬가 발의 움직임을 따라 유연하게 반응하고, 힘이 모이는 중족부에는 무봉제 필름 오버레이와 레이스 지지 구조를 겹쳤습니다. 반복되는 방향 전환에서도 중심을 지키도록 구성했습니다.',
     specs: ['Lateral open-knit mesh', 'No-sew film overlay', 'Midfoot lace support'],
     mediaType: 'video',
     media: assetPath('assets/video/upper-side.mp4'),
@@ -117,9 +115,9 @@ export const features = [
   {
     id: 'heel',
     name: 'Heel structure',
-    korean: '뒤꿈치가 흔들리지 않도록.',
+    korean: '뒤꿈치의 기준을 단단하게.',
     body:
-      '넓게 감싸는 힐 카운터와 바깥으로 확장된 베이스를 조합했습니다. 발이 신발 안에서 뜨는 느낌을 줄이고, 오픈 스탠스 착지에서 안정적인 기준점을 만드는 설계입니다.',
+      '넓게 감싸는 힐 카운터와 바깥으로 확장된 베이스를 조합했습니다. 반복되는 오픈 스탠스 착지에서 뒤꿈치를 지지하고, 자신의 움직임을 이어가는 기준점을 만듭니다.',
     specs: ['Sculpted heel counter', 'Wide landing base', 'Padded collar'],
     mediaType: 'video',
     media: assetPath('assets/video/heel-ankle.mp4'),
@@ -163,9 +161,9 @@ export const features = [
   {
     id: 'arch',
     name: 'Midfoot chassis',
-    korean: '분리된 구조가, 중심을 지지하다.',
+    korean: '움직임은 나누고, 중심의 균형은 이어가도록.',
     body:
-      '아웃솔과 미드솔 사이에 배치한 중족부 브리지는 발의 가운데를 단단히 잡고, 앞뒤 구획이 각자의 움직임을 이어가도록 연결합니다. 착지 뒤에는 불필요한 비틀림을 줄이고, 다음 스텝에서는 자연스러운 굴곡을 남기는 구조입니다.',
+      '아웃솔과 미드솔 사이의 중족부 브리지가 앞뒤 구획을 연결합니다. 착지에서는 비틀림을 지지하고, 다음 스텝에서는 전족부의 굴곡이 자연스럽게 이어지도록 구성했습니다.',
     specs: ['Midfoot support bridge', 'Split flex geometry', 'Torsion control chassis'],
     mediaType: 'video',
     media: assetPath('assets/video/arch-exploded.mp4'),
@@ -209,7 +207,7 @@ export const features = [
   {
     id: 'rubber',
     name: 'Rubber outsole',
-    korean: '멈추고, 밀고, 다시 방향을 바꾸는 패턴.',
+    korean: '멈추고, 밀고, 자신의 리듬으로 전환하도록.',
     body:
       '파동형 러그를 전족과 뒤꿈치에 나누고 중앙 홈으로 회전 동작을 연결했습니다. 하드코트를 기준으로 접지와 슬라이드가 한쪽으로 치우치지 않도록 설계한 러버 구성입니다.',
     specs: ['Wave traction map', 'Shore A 64 target', 'Hard-court compound'],
@@ -260,9 +258,9 @@ export const features = [
   {
     id: 'midsole',
     name: 'Balanced cushioning',
-    korean: '쿠셔닝과 안정감 사이, 정확한 균형.',
+    korean: '쿠셔닝과 안정감 사이, 조율된 균형.',
     body:
-      '무조건 푹신한 감각을 목표로 하지 않았습니다. 뒤꿈치 충격은 부드럽게 분산하면서, 좌우 하중 이동에서는 미드솔이 과도하게 무너지지 않도록 밀도를 조율했습니다. 반복 착지와 방향 전환을 함께 고려한 밸런스입니다.',
+      '뒤꿈치 구간은 착지 충격을 받아들이고, 넓은 플랫폼은 좌우 하중 이동에서 형태를 유지하도록 구성했습니다. 과도한 쿠셔닝보다 반복 착지와 방향 전환에 필요한 균형을 우선한 미드솔 설계입니다.',
     specs: ['Balanced CMEVA density', 'Controlled compression', 'Stable heel platform'],
     mediaType: 'video',
     media: assetPath('assets/video/balance-on-foot.mp4'),
@@ -313,9 +311,9 @@ export const features = [
   {
     id: 'cushioning',
     name: 'Cushioning in motion',
-    korean: '착지 순간을 부드럽게 받아내다.',
+    korean: '착지의 충격은 받아내고, 다음 움직임은 이어가도록.',
     body:
-      '정지된 단면이 아니라 실제 체중 이동에서 쿠셔닝을 확인합니다. 넓은 힐 CMEVA가 첫 충격을 분산하고, 곡면 미드솔이 다음 스텝으로 이어지는 구름 동작을 돕습니다.',
+      '실제 체중 이동에서 뒤꿈치 쿠셔닝이 눌리는 과정을 보여줍니다. 넓은 힐 구간에서 시작된 착지가 곡면 미드솔을 따라 다음 스텝으로 이어집니다.',
     specs: ['Heel impact dispersion', 'CMEVA compression zone', 'Wide landing platform'],
     mediaType: 'video',
     media: assetPath('assets/video/cushioning-on-foot.mp4'),
@@ -365,11 +363,11 @@ export const features = [
   },
   {
     id: 'lifestyle',
-    name: 'Court to everyday',
-    korean: '테니스와 웰니스 라이프의 경계를 허물다.',
+    name: 'Court to routine',
+    korean: '코트에서 지킨 균형을, 매일의 루틴까지.',
     body:
-      '코트화의 안정감은 유지하면서 일상 착장에서도 편안하게 보이도록 전족부 볼륨과 토 스프링을 다듬었습니다. 발가락이 자연스럽게 펼쳐지고, 보행 시 부드럽게 굴러가는 설계입니다.',
-    specs: ['Relaxed forefoot volume', 'Natural toe splay', 'Court-to-street comfort'],
+      '코트에서 필요한 안정적인 구조를 유지하면서 전족부 볼륨과 전체 실루엣을 자연스럽게 다듬었습니다. 운동하는 순간부터 운동 뒤의 일상까지, 몸을 관리하는 루틴이 흐트러지지 않도록 구성했습니다.',
+    specs: ['Relaxed forefoot volume', 'Balanced walking transition', 'Court-to-routine comfort'],
     mediaType: 'video',
     media: assetPath('assets/video/lifestyle-forefoot.mp4'),
     poster: assetPath('assets/images/lifestyle-forefoot-poster.jpg'),

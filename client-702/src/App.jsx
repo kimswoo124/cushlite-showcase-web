@@ -14,7 +14,6 @@ import { assetPath, colorways, features, priceBenchmarks } from './data';
 gsap.registerPlugin(ScrollTrigger);
 
 // 같은 앱 서버가 /302/, /702/ 를 함께 서빙하므로 루트 기준 상대 경로로 이동한다.
-// (외부 절대 URL 을 쓰면 배포 주소가 바뀔 때마다 링크가 죽는다)
 const SIBLING_SHOWCASE_URL = '/302/';
 
 function Navigation({ progress }) {
@@ -79,7 +78,7 @@ function Hero() {
         </div>
 
         <div className="hero-copy">
-          <p className="hero-kicker">NEW ON-COURT TENNIS SHOE</p>
+          <p className="hero-kicker">TENNIS-BORN ACTIVE WELLNESS</p>
           <h1>
             CUSHLITE <span>702</span>
           </h1>
@@ -109,10 +108,10 @@ function PriceSection() {
     <section className="price-section section-pad" id="price">
       <div className="section-heading price-heading">
         <p className="eyebrow">PRICE × FUNCTION</p>
-        <h2>동급 소비자가에서,<br />기능의 우선순위가 갈린다.</h2>
+        <h2>같은 가격대,<br />서로 다른 설계 철학.</h2>
         <p>
-          주요 퍼포먼스 테니스화의 국내 참고 소비자가와 기능 성향을 함께 비교했습니다. 각 모델이 민첩성,
-          안정성, 쿠셔닝 중 어디에 무게를 두는지 살펴보고 CUSHLITE 702의 균형형 포지션을 정리했습니다.
+          주요 퍼포먼스 테니스화의 국내 참고 소비자가와 설계 방향을 비교했습니다. 가격의 높고 낮음보다
+          각 제품이 어떤 움직임과 사용자를 우선했는지 살펴보고 CUSHLITE 702의 균형형 포지션을 정리했습니다.
         </p>
       </div>
 
@@ -149,17 +148,17 @@ function PriceSection() {
         <div>
           <span>PRICE BAND</span>
           <strong>₩159K—₩189K</strong>
-          <p>비교군 상단 가격대는 안정성과 쿠셔닝이 강화된 모델이 형성합니다.</p>
+          <p>한국 공식 정상가를 기준으로 코트 용도와 설계 방향을 함께 비교합니다.</p>
         </div>
         <div>
           <span>CUSHLITE POSITION</span>
-          <strong>Balance, not maximum</strong>
-          <p>한 기능의 극대화보다 착지 완충, 측면 지지, 일상 활용의 균형을 선택합니다.</p>
+          <strong>Balance over excess</strong>
+          <p>과도한 쿠셔닝이나 공격적인 반응성보다 착지 완충, 측면 지지와 방향 전환의 균형을 선택합니다.</p>
         </div>
         <div>
-          <span>FOR DAILY MOVERS</span>
-          <strong>On-court ↔ Daily</strong>
-          <p>코트 퍼포먼스와 매일 반복하는 몸 관리 루틴 사이를 자연스럽게 연결합니다.</p>
+          <span>FOR ROUTINE KEEPERS</span>
+          <strong>Court first. Life in rhythm.</strong>
+          <p>매일 같은 시간에 몸을 움직이며 자신의 균형을 지키는 사람을 위한 코트 중심 설계입니다.</p>
         </div>
       </div>
     </section>
@@ -327,22 +326,22 @@ function DailyMovementCollage() {
   const clips = [
     {
       id: 'tennis',
-      title: '코트의 템포',
-      detail: '사이드 스텝과 빠른 방향 전환',
+      title: '코트 위의 절제된 리듬',
+      detail: '시끄럽지 않게 자신의 리듬을 지키는 시간',
       video: assetPath('assets/video/702-tennis.mp4'),
       poster: assetPath('assets/images/702-tennis-poster.jpg'),
     },
     {
       id: 'cafe',
-      title: '도시의 리셋',
-      detail: '운동 뒤에도 이어지는 편안함',
+      title: '일상 속 편안한 여유',
+      detail: '움직임 뒤에도 흐트러지지 않는 균형',
       video: assetPath('assets/video/702-cafe.mp4'),
       poster: assetPath('assets/images/702-cafe-poster.jpg'),
     },
     {
       id: 'resort',
-      title: '느린 회복',
-      detail: '걷고 쉬는 시간까지 자연스럽게',
+      title: '몸과 마음을 돌보는 휴식',
+      detail: '몸을 돌보는 습관이 삶으로 이어지는 순간',
       video: assetPath('assets/video/702-resort.mp4'),
       poster: assetPath('assets/images/702-resort-poster.jpg'),
     },
@@ -778,9 +777,9 @@ function TechnologyStory({ activeIndex, setActiveIndex, onNavigate }) {
   return (
     <section className="technology" id="technology" ref={storyRef}>
       <div className="technology-header section-pad">
-        <p className="eyebrow">DAILY MOVEMENT</p>
-        <h2>매일 반복 가능한 몸 관리 루틴을 신는 신발.</h2>
-        <p>아침의 가벼운 워킹부터 코트 위 움직임, 운동 뒤 회복의 시간까지. CUSHLITE 702는 한 순간의 퍼포먼스보다 매일 같은 시간에 몸을 움직이는 리듬을 편안하고 안정적으로 이어가도록 설계했습니다.</p>
+        <p className="eyebrow">DAILY RHYTHM</p>
+        <h2>매일 같은 시간의 움직임이, 삶의 균형을 만든다.</h2>
+        <p>빠른 전환과 반복 착지에 집중하는 순간부터 운동 뒤의 여유로운 시간까지. CUSHLITE 702는 매일 자신의 리듬을 지키며 몸을 관리하는 사람을 위해, 코트의 안정감과 일상에 어울리는 절제된 스타일을 하나의 루틴으로 연결합니다.</p>
       </div>
 
       <DailyMovementCollage />
@@ -826,10 +825,10 @@ function ColorSection() {
       <div className="color-showcase">
         <header className="colors-heading">
           <p className="eyebrow">FOUR COLORWAYS</p>
-          <h2>같은 구조,<br />서로 다른 네 가지 온도.</h2>
+          <h2>절제된 구조에,<br />서로 다른 네 가지 무드.</h2>
           <p>
-            화이트를 중심으로 아이스 블루, 소프트 라임, 코트 핑크를 더했습니다. 코트웨어부터 매일의
-            웰니스 룩까지 자연스럽게 이어지는 컬러 구성입니다.
+            화이트를 중심으로 아이스 블루, 소프트 라임, 코트 핑크를 더했습니다. 과시적이지 않지만
+            분명한 인상을 남기는 컬러로, 코트웨어부터 정돈된 일상 착장까지 자연스럽게 이어집니다.
           </p>
         </header>
 
@@ -861,6 +860,10 @@ function ColorSection() {
 function Closing() {
   return (
     <footer className="closing">
+      <div className="closing-brand">
+        <p>절제된 루틴이 만드는 우아한 삶.</p>
+        <span>SERGIO TACCHINI</span>
+      </div>
       <div className="footer-bottom">
         <span>SERGIO TACCHINI</span>
         <p>Concept showcase · Prices and specifications are temporary editorial content.</p>

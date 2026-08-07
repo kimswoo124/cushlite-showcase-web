@@ -109,7 +109,6 @@ function createCopyTimeline(copyItems, variant = 'default') {
 }
 
 // 같은 앱 서버가 /302/, /702/ 를 함께 서빙하므로 루트 기준 상대 경로로 이동한다.
-// (외부 절대 URL 을 쓰면 배포 주소가 바뀔 때마다 링크가 죽는다)
 const SIBLING_SHOWCASE_URL = '/702/';
 
 const sectionNavigation = [
@@ -456,7 +455,7 @@ function Hero() {
         <div className="hero-lockup">
           <p className="scene-reveal hero-brand">SERGIO TACCHINI</p>
           <h1 className="scene-reveal">CUSHLITE <span>302</span></h1>
-          <p className="scene-reveal hero-line">코트에서 시작해, 매일의 움직임으로.</p>
+          <p className="scene-reveal hero-line">코트에서 시작해, 매일의 리듬으로.</p>
         </div>
         <aside className="hero-price scene-reveal">
           <span>제안 소비자가</span>
@@ -481,8 +480,8 @@ function ProductReveal() {
         <div className="media-wash reveal-wash" />
         <div className="reveal-copy">
           <p className="scene-reveal">CUSHLITE 302</p>
-          <h2 className="scene-reveal">하루의 움직임을<br />하나의 신발로.</h2>
-          <span className="scene-reveal">Easy entry. Stable motion. Daily comfort.</span>
+          <h2 className="scene-reveal">신는 순간부터,<br />하루의 루틴까지.</h2>
+          <span className="scene-reveal">Easy entry. Natural motion. Daily balance.</span>
         </div>
       </div>
     </section>
@@ -563,8 +562,8 @@ function PriceComparison() {
   return (
     <section className="price-section" id="comparison" ref={ref} data-scene-anchor>
       <div className="section-intro">
-        <h2>경쟁사 동급 가격대,<br />무엇이 다른가.</h2>
-        <p>국내 공식 소비자가를 기준으로 가격대를 비교하고, 각 제품이 우선하는 코트 용도, 지지 구조, 쿠셔닝과 일상 활용 범위를 함께 분석했습니다.</p>
+        <h2>같은 가격대,<br />서로 다른 설계 방향.</h2>
+        <p>국내 공식 소비자가를 기준으로 각 제품이 어떤 움직임과 사용자를 우선했는지 비교했습니다. 가격의 높고 낮음보다 코트 용도, 지지 구조, 쿠셔닝과 일상 활용 범위를 함께 살펴봅니다.</p>
       </div>
       <div className="comparison-scroll" role="region" aria-label="테니스화 소비자가와 기능 비교" tabIndex="0">
         <div className="comparison-board">
@@ -630,7 +629,7 @@ function PriceComparison() {
       </div>
       <div className="comparison-conclusion">
         <strong>CUSHLITE 302의 위치</strong>
-        <p>임시 소비자가는 Vapor Pro 3보다 1만 원 높고, Barricade 14와 GEL-RESOLUTION X보다 1만 원 낮습니다. 차별점은 특정 경기 기능의 극대화보다 이지 엔트리와 일상 착화까지 이어지는 활용 범위입니다.</p>
+        <p>특정 경기 기능 하나를 극대화하기보다 이지 엔트리, 자연스러운 보행과 가벼운 코트 움직임을 연결했습니다. 매일 같은 시간에 자신의 루틴을 이어가는 사람을 위한 설계입니다.</p>
       </div>
       <p className="price-note">2026년 8월 6일 한국 공식 정상가 기준. 할인 판매가는 제외했습니다. CUSHLITE 302 가격과 기능 정의는 출시 전 편집용 개발 기준입니다.</p>
     </section>
@@ -903,22 +902,22 @@ function StoryIntro() {
   const routineClips = [
     {
       time: '07:30',
-      title: '아침의 워킹',
-      detail: '몸의 리듬을 깨우는 첫 움직임',
+      title: '아침의 시작',
+      detail: '몸과 마음을 깨우는 첫 움직임',
       video: assetPath('processed/video/routine-walking.mp4'),
       poster: assetPath('processed/images/routine-walking-poster.jpg'),
     },
     {
       time: '13:10',
-      title: '일상 속 리셋',
-      detail: '코트와 하루 사이를 잇는 여유',
+      title: '일상 사이의 여유',
+      detail: '서두르지 않고 리듬을 지키는 시간',
       video: assetPath('processed/video/routine-cafe.mp4'),
       poster: assetPath('processed/images/routine-cafe-poster.jpg'),
     },
     {
       time: '18:30',
-      title: '코트로 향하는 순간',
-      detail: '반복 가능한 루틴의 다음 스텝',
+      title: '코트로 이어지는 루틴',
+      detail: '매일의 움직임이 집중으로 이어지는 순간',
       video: assetPath('processed/video/routine-court.mp4'),
       poster: assetPath('processed/images/routine-court-poster.jpg'),
     },
@@ -928,8 +927,8 @@ function StoryIntro() {
     <section className="story-intro routine-story" id="routine" ref={ref} data-scene-anchor>
       <div className="routine-story-inner">
         <header className="routine-story-header">
-          <h2 className="routine-reveal">매일 반복 가능한<br />몸 관리 루틴을 신는 신발.</h2>
-          <p className="routine-reveal">아침의 워킹, 일상 속 짧은 리셋, 코트로 향하는 순간까지. CUSHLITE 302는 하루의 서로 다른 움직임을 하나의 리듬으로 이어갑니다.</p>
+          <h2 className="routine-reveal">매일 같은 시간,<br />가볍게 시작하는 나만의 루틴.</h2>
+          <p className="routine-reveal">아침의 첫 움직임, 일상 사이의 여유, 코트로 향하는 순간까지. CUSHLITE 302는 신는 순간부터 하루의 서로 다른 움직임을 하나의 절제된 리듬으로 이어갑니다.</p>
         </header>
         <div className="routine-triptych">
           {routineClips.map((clip) => (
@@ -969,8 +968,8 @@ function RoutineFilm() {
         <div className="media-wash closing-wash" />
         <div className="closing-copy">
           <p className="scene-reveal">ON-COURT ROUTINE</p>
-          <h2 className="scene-reveal">일상의 리듬을<br />코트의 움직임으로.</h2>
-          <p className="scene-reveal routine-film-copy">워밍업에서 첫 스텝, 반복되는 사이드 스텝까지. CUSHLITE 302는 매일 이어가는 움직임이 코트에서도 안정적인 리듬이 되도록 받쳐줍니다.</p>
+          <h2 className="scene-reveal">매일의 루틴이,<br />코트의 첫 스텝으로.</h2>
+          <p className="scene-reveal routine-film-copy">워밍업에서 첫 스텝, 반복되는 사이드 스텝까지. 같은 시간에 몸을 움직이는 습관이 코트에서도 자신의 리듬으로 이어지도록 받쳐줍니다.</p>
         </div>
       </div>
     </section>
@@ -1047,8 +1046,8 @@ function ColorVariations() {
     <section className="color-variation" id="colors" ref={ref} data-scene-anchor>
       <div className="color-variation-inner">
         <header className="color-variation-header">
-          <h2 className="color-reveal">하나의 설계,<br />네 가지 컬러.</h2>
-          <p className="color-reveal">CUSHLITE 302의 동일한 구조를 아이보리, 블루 그레이, 클린 화이트와 세이지 화이트 조합으로 확장했습니다.</p>
+          <h2 className="color-reveal">매일의 루틴에,<br />네 가지 차분한 컬러.</h2>
+          <p className="color-reveal">동일한 구조를 아이보리, 블루 그레이, 클린 화이트와 세이지 화이트로 확장했습니다. 과시적이지 않은 컬러가 일상과 코트 사이의 절제된 스타일을 완성합니다.</p>
         </header>
         <figure className="color-media">
           <img
@@ -1069,6 +1068,17 @@ function ColorVariations() {
         </div>
       </div>
     </section>
+  );
+}
+
+function Closing() {
+  return (
+    <footer className="closing">
+      <div className="closing-brand">
+        <p>절제된 루틴이 만드는 우아한 삶.</p>
+        <span>SERGIO TACCHINI</span>
+      </div>
+    </footer>
   );
 }
 
@@ -1161,6 +1171,7 @@ export default function App() {
         <FeatureScene key={scene.id} scene={scene} index={index} />
       ))}
       <ColorVariations />
+      <Closing />
     </main>
   );
 }

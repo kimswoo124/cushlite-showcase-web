@@ -4,8 +4,6 @@ export const assetPath = (path) => {
   const normalizedPath = path.replace(/^\/+/, '');
 
   // 영상·제품 이미지는 저장소에 두지 않고 S3 에 올린 뒤 서버가 중계한다.
-  // (페이지 저장으로 자산이 함께 내려가지 않도록, 또 public 저장소에
-  //  미출시 제품 자산이 남지 않도록)
   // 미디어 경로는 앱 서버 루트 기준이라 BASE_URL 을 붙이지 않는다.
   const media = normalizedPath.match(/(?:^|\/)(video|images)\/(.+)$/);
   if (media) return `/api/media/${PRODUCT}/${media[1]}/${media[2]}`;
@@ -19,17 +17,17 @@ export const priceBenchmarks = [
     model: 'CUSHLITE 302',
     price: '₩169,000',
     priceStatus: '출시 전 임시 소비자가',
-    role: '코트 투 데일리',
+    role: '데일리 루틴 / 코트',
     featured: true,
     image: assetPath('processed/images/cushlite-302-all-colors.jpg'),
     imageAlt: '네 가지 컬러의 CUSHLITE 302 제품 사진',
-    court: '하드 코트 중심, 일상 보행까지',
-    play: '올코트 밸런스, 반복 루틴',
+    court: '일상 보행에서 가벼운 코트까지',
+    play: '자연스러운 보행, 반복 루틴',
     support: '필름 패널과 외부 힐 TPU',
     cushioning: '넓은 힐 베이스, 안정형 폼',
     outsole: '헤링본 패턴, 중앙 회전 접점',
     daily: '힐탭과 패딩 카라',
-    analysis: '코트 성능만 극대화하기보다 운동과 매일의 움직임을 이어주는 균형형 제안입니다.',
+    analysis: '신는 순간부터 일상과 코트까지, 매일 같은 시간의 움직임을 이어가는 균형형 제안입니다.',
   },
   {
     brand: 'NIKE',
@@ -101,8 +99,8 @@ export const scenes = [
     id: 'easy-entry',
     name: 'Easy entry',
     eyebrow: 'EASY ENTRY',
-    title: '매일 신는 동작부터 가볍게.',
-    body: '길게 올라온 힐탭과 부드러운 카라가 발을 자연스럽게 안내합니다. 운동을 시작하는 첫 동작부터 불필요한 힘을 줄였습니다.',
+    title: '신는 순간부터, 하루의 리듬을 가볍게.',
+    body: '길게 올라온 힐탭과 부드러운 패딩 카라가 발의 진입을 자연스럽게 안내합니다. 매일 반복하는 첫 착화 동작을 간결하게 구성했습니다.',
     video: assetPath('processed/video/easy-entry-full.mp4'),
     poster: assetPath('processed/images/easy-entry-full-poster.jpg'),
     position: 'left-bottom',
@@ -119,8 +117,8 @@ export const scenes = [
     id: 'cushioning',
     name: 'Upper and cushioning balance',
     eyebrow: 'UPPER TO MIDSOLE BALANCE',
-    title: '유연하게 움직이고, 안정적으로 받치도록.',
-    body: '메시와 무봉제 필름 패널은 발의 움직임을 유연하게 따라가고, 넓은 미드솔 플랫폼은 착지 시 좌우 흔들림을 줄입니다. 편안한 보행과 코트의 방향 전환을 하나의 구조로 연결했습니다.',
+    title: '유연한 움직임 위에, 필요한 지지를.',
+    body: '메시 어퍼가 발의 움직임을 따라 유연하게 반응하고, 무봉제 필름 패널과 넓은 미드솔 플랫폼이 측면과 착지 구간을 받치도록 구성했습니다. 일상의 보행과 가벼운 코트 움직임을 하나의 설계로 연결합니다.',
     video: assetPath('processed/video/upper-cushioning.mp4'),
     poster: assetPath('processed/images/upper-cushioning-poster.jpg'),
     position: 'right-bottom',
@@ -136,8 +134,8 @@ export const scenes = [
     id: 'heel-clip',
     name: 'External heel clip',
     eyebrow: 'EXTERNAL HEEL SUPPORT',
-    title: '뒤꿈치의 움직임을 바깥에서 잡아주도록.',
-    body: '유광 TPU 클립이 힐 카운터의 바깥쪽을 감쌉니다. 착지와 방향 전환에서 뒤꿈치가 좌우로 밀리는 움직임을 제어합니다.',
+    title: '뒤꿈치 바깥에 세운 안정의 기준.',
+    body: '유광 TPU 클립이 힐 카운터 바깥을 감싸고 미드솔과 연결됩니다. 착지와 방향 전환에서 뒤꿈치의 좌우 움직임을 지지하도록 설계했습니다.',
     video: assetPath('processed/video/heel-tpu.mp4'),
     poster: assetPath('processed/images/heel-tpu-poster.webp'),
     position: 'left-top',
@@ -153,7 +151,7 @@ export const scenes = [
     id: 'outsole',
     name: 'Herringbone outsole',
     title: '걷고, 밀고, 방향을 바꾸는 하나의 패턴.',
-    body: '촘촘한 헤링본 러그와 중앙 회전 영역을 하나의 바닥 구조로 연결했습니다. 일상의 보행과 코트의 빠른 전환에 필요한 접점을 나눠 배치했습니다.',
+    body: '촘촘한 헤링본 러그와 중앙 회전 영역을 하나의 바닥 구조로 연결했습니다. 일상의 보행과 코트의 전환에 필요한 접점을 구분해 배치했습니다.',
     video: assetPath('processed/video/outsole.mp4'),
     poster: assetPath('processed/images/outsole-poster.jpg'),
     position: 'left-center',
@@ -169,8 +167,8 @@ export const scenes = [
     id: 'toe-spring',
     name: 'Low toe spring',
     eyebrow: 'NATURAL FOREFOOT',
-    title: '과도하게 굴리지 않는 자연스러운 전족부.',
-    body: '앞쪽 곡률을 낮춰 발가락 아래의 접지 시간을 길게 가져갑니다. 걷는 동안은 자연스럽게, 코트에서는 빠르게 힘을 전달합니다.',
+    title: '발앞꿈치가 자연스럽게 닿고, 다음 움직임이 이어지도록.',
+    body: '낮은 전족부 곡률로 발앞꿈치의 접지 구간을 길게 가져갑니다. 일상 보행에서는 자연스럽게, 코트에서는 다음 스텝으로 힘을 이어가도록 구성했습니다.',
     video: assetPath('processed/video/toe-spring.mp4'),
     poster: assetPath('processed/images/toe-spring-poster.webp'),
     position: 'right-top',
