@@ -1,0 +1,8 @@
+{
+  "slug": "cushlite-showcase",
+  "displayName": "CUSHLITE 302/702 | Sergio Tacchini",
+  "github": "kimswoo124/cushlite-showcase-web",
+  "runtime": "node",
+  "start": "npm start",
+  "port": 3000
+}
