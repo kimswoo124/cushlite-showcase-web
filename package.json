@@ -1,0 +1,18 @@
+{
+  "name": "cushlite-showcase",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "workspaces": [
+    "client-302",
+    "client-702",
+    "server"
+  ],
+  "scripts": {
+    "build": "npm run build -w client-302 && npm run build -w client-702",
+    "start": "node server/src/index.js",
+    "dev:server": "node --watch server/src/index.js",
+    "media:upload": "node scripts/upload-media.mjs",
+    "media:verify": "node scripts/verify-media.mjs"
+  }
+}

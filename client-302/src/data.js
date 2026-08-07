@@ -1,0 +1,185 @@
+const PRODUCT = '302';
+
+export const assetPath = (path) => {
+  const normalizedPath = path.replace(/^\/+/, '');
+
+  // 영상·제품 이미지는 저장소에 두지 않고 S3 에 올린 뒤 서버가 중계한다.
+  // (페이지 저장으로 자산이 함께 내려가지 않도록, 또 public 저장소에
+  //  미출시 제품 자산이 남지 않도록)
+  // 미디어 경로는 앱 서버 루트 기준이라 BASE_URL 을 붙이지 않는다.
+  const media = normalizedPath.match(/(?:^|\/)(video|images)\/(.+)$/);
+  if (media) return `/api/media/${PRODUCT}/${media[1]}/${media[2]}`;
+
+  return `${import.meta.env.BASE_URL}${normalizedPath}`;
+};
+
+export const priceBenchmarks = [
+  {
+    brand: 'SERGIO TACCHINI',
+    model: 'CUSHLITE 302',
+    price: '₩169,000',
+    priceStatus: '출시 전 임시 소비자가',
+    role: '코트 투 데일리',
+    featured: true,
+    image: assetPath('processed/images/cushlite-302-all-colors.jpg'),
+    imageAlt: '네 가지 컬러의 CUSHLITE 302 제품 사진',
+    court: '하드 코트 중심, 일상 보행까지',
+    play: '올코트 밸런스, 반복 루틴',
+    support: '필름 패널과 외부 힐 TPU',
+    cushioning: '넓은 힐 베이스, 안정형 폼',
+    outsole: '헤링본 패턴, 중앙 회전 접점',
+    daily: '힐탭과 패딩 카라',
+    analysis: '코트 성능만 극대화하기보다 운동과 매일의 움직임을 이어주는 균형형 제안입니다.',
+  },
+  {
+    brand: 'NIKE',
+    model: 'Vapor Pro 3',
+    price: '₩159,000',
+    priceStatus: '한국 공식 정상가',
+    role: '스피드 / 컷 동작',
+    image: assetPath('processed/images/competitors/nike-vapor-pro-3.jpg'),
+    imageAlt: '나이키 베이퍼 프로 3 하드 코트 테니스화 측면 사진',
+    court: '하드 코트',
+    play: '빠른 컷, 네트 어프로치',
+    support: '중족부 핏 밴드, 힐 안정',
+    cushioning: '전족부 Air Zoom',
+    outsole: '경량 고무, 깊은 플렉스 노치',
+    daily: '일반 레이스, 경기 중심',
+    analysis: '전족부 유연성과 반응성을 앞세운 스피드 성향입니다.',
+    sourceLabel: '나이키 코리아',
+    sourceUrl: 'https://www.nike.com/kr/t/%EB%B2%A0%EC%9D%B4%ED%8D%BC-%ED%94%84%EB%A1%9C-3-%EB%82%A8%EC%84%B1-%ED%95%98%EB%93%9C-%EC%BD%94%ED%8A%B8-%ED%85%8C%EB%8B%88%EC%8A%A4%ED%99%94-PYWxtJJ1/FZ2161-003',
+  },
+  {
+    brand: 'ADIDAS',
+    model: 'Barricade 14',
+    price: '₩179,000',
+    priceStatus: '한국 공식 정상가',
+    role: '안정 / 내구',
+    image: assetPath('processed/images/competitors/adidas-barricade-14.jpg'),
+    imageAlt: '아디다스 바리케이드 14 하드 코트 테니스화 측면 사진',
+    court: '하드 코트',
+    play: '긴 \uB7A0\uB9AC, 반복 측면 이동',
+    support: '경량 \uC100\uC2DC, Repetitor',
+    cushioning: '에너지 리턴과 안정 균형',
+    outsole: 'Lighttraxion, Adituff',
+    daily: '쿠션 카라와 설포',
+    analysis: '오랜 \uB7A0\uB9AC의 지지력과 마모 대응을 중시한 안정형입니다.',
+    sourceLabel: '아디다스 코리아',
+    sourceUrl: 'https://www.adidas.co.kr/%EB%B0%94%EB%A6%AC%EC%BC%80%EC%9D%B4%EB%93%9C-14-%ED%85%8C%EB%8B%88%EC%8A%A4%ED%99%94/JS2561.html',
+  },
+  {
+    brand: 'ASICS',
+    model: 'GEL-RESOLUTION X',
+    price: '₩179,000',
+    priceStatus: '한국 공식 정상가',
+    role: '베이스라인 / 측면 지지',
+    image: assetPath('processed/images/competitors/asics-gel-resolution-x.jpg'),
+    imageAlt: '아식스 젤 레졸루션 X 올코트 테니스화 측면 사진',
+    court: '올코트, 베이스라인',
+    play: '좌우 커버, 급정지',
+    support: 'DYNAWALL, DYNALACING',
+    cushioning: '전족부 GEL, 2피스 미드솔',
+    outsole: 'AHARPLUS 내구 고무',
+    daily: '높은 내측 카라, 경기 중심',
+    analysis: '베이스라인 좌우 이동의 지지와 착지 안정을 우선합니다.',
+    sourceLabel: '아식스 코리아',
+    sourceUrl: 'https://m.asics.co.kr/p/AKR_112612011-402',
+  },
+];
+
+export const comparisonCriteria = [
+  ['court', '코트 용도'],
+  ['play', '플레이 성향'],
+  ['support', '지지 구조'],
+  ['cushioning', '쿠셔닝'],
+  ['outsole', '아웃솔 / 내구'],
+  ['daily', '일상 활용'],
+];
+
+export const scenes = [
+  {
+    id: 'easy-entry',
+    name: 'Easy entry',
+    eyebrow: 'EASY ENTRY',
+    title: '매일 신는 동작부터 가볍게.',
+    body: '길게 올라온 힐탭과 부드러운 카라가 발을 자연스럽게 안내합니다. 운동을 시작하는 첫 동작부터 불필요한 힘을 줄였습니다.',
+    video: assetPath('processed/video/easy-entry-full.mp4'),
+    poster: assetPath('processed/images/easy-entry-full-poster.jpg'),
+    position: 'left-bottom',
+    objectPosition: 'center bottom',
+    rangeEnd: 0.98,
+    specs: ['Extended heel pull', 'Soft entry collar', 'Low-friction lining'],
+    annotations: [
+      { code: 'EN-01', label: 'EXTENDED HEEL PULL', detail: 'One-hand entry support', anchor: [25, 51], elbow: [17, 49], labelPosition: [7, 49], align: 'left' },
+      { code: 'EN-02', label: 'PADDED ENTRY', detail: 'Soft collar contact', anchor: [36, 56], elbow: [69, 54], labelPosition: [92, 54], align: 'right' },
+      { code: 'EN-03', label: 'LOW-FRICTION LINING', detail: 'Smooth foot guidance', anchor: [39, 59], elbow: [68, 75], labelPosition: [92, 75], align: 'right' },
+    ],
+  },
+  {
+    id: 'cushioning',
+    name: 'Upper and cushioning balance',
+    eyebrow: 'UPPER TO MIDSOLE BALANCE',
+    title: '유연하게 움직이고, 안정적으로 받치도록.',
+    body: '메시와 무봉제 필름 패널은 발의 움직임을 유연하게 따라가고, 넓은 미드솔 플랫폼은 착지 시 좌우 흔들림을 줄입니다. 편안한 보행과 코트의 방향 전환을 하나의 구조로 연결했습니다.',
+    video: assetPath('processed/video/upper-cushioning.mp4'),
+    poster: assetPath('processed/images/upper-cushioning-poster.jpg'),
+    position: 'right-bottom',
+    objectPosition: 'center center',
+    specs: ['Flexible mesh upper', 'No-sew support frame', 'Wide stable platform'],
+    annotations: [
+      { code: 'UM-01', label: 'FLEX MESH UPPER', detail: 'Adaptive movement layer', anchor: [36, 42], elbow: [22, 28], labelPosition: [7, 28], align: 'left' },
+      { code: 'UM-02', label: 'NO-SEW FRAME', detail: 'Targeted lateral support', anchor: [58, 48], elbow: [76, 31], labelPosition: [92, 31], align: 'right' },
+      { code: 'UM-03', label: 'WIDE PLATFORM', detail: 'Stable landing footprint', anchor: [48, 72], elbow: [25, 80], labelPosition: [7, 80], align: 'left' },
+    ],
+  },
+  {
+    id: 'heel-clip',
+    name: 'External heel clip',
+    eyebrow: 'EXTERNAL HEEL SUPPORT',
+    title: '뒤꿈치의 움직임을 바깥에서 잡아주도록.',
+    body: '유광 TPU 클립이 힐 카운터의 바깥쪽을 감쌉니다. 착지와 방향 전환에서 뒤꿈치가 좌우로 밀리는 움직임을 제어합니다.',
+    video: assetPath('processed/video/heel-tpu.mp4'),
+    poster: assetPath('processed/images/heel-tpu-poster.webp'),
+    position: 'left-top',
+    objectPosition: 'center center',
+    specs: ['Gloss TPU clip', 'Lateral containment', 'Midsole anchor'],
+    annotations: [
+      { code: 'HL-01', label: 'GLOSS TPU CLIP', detail: 'External rearfoot frame', anchor: [60, 48], elbow: [77, 27], labelPosition: [92, 27], align: 'right' },
+      { code: 'HL-02', label: 'WAVE EDGE', detail: 'Progressive side support', anchor: [54, 57], elbow: [24, 62], labelPosition: [7, 62], align: 'left' },
+      { code: 'HL-03', label: 'MIDSOLE ANCHOR', detail: 'Frame-to-foam connection', anchor: [61, 68], elbow: [77, 78], labelPosition: [92, 78], align: 'right' },
+    ],
+  },
+  {
+    id: 'outsole',
+    name: 'Herringbone outsole',
+    title: '걷고, 밀고, 방향을 바꾸는 하나의 패턴.',
+    body: '촘촘한 헤링본 러그와 중앙 회전 영역을 하나의 바닥 구조로 연결했습니다. 일상의 보행과 코트의 빠른 전환에 필요한 접점을 나눠 배치했습니다.',
+    video: assetPath('processed/video/outsole.mp4'),
+    poster: assetPath('processed/images/outsole-poster.jpg'),
+    position: 'left-center',
+    objectPosition: 'center center',
+    specs: ['Herringbone grip', 'Midfoot cutaway', 'Pivot circle'],
+    annotations: [
+      { code: 'OU-01', label: 'HERRINGBONE GRIP', detail: 'Multi-direction traction', anchor: [61, 46], elbow: [76, 25], labelPosition: [92, 25], align: 'right' },
+      { code: 'OU-02', label: 'MIDFOOT CUTAWAY', detail: 'Reduced central mass', anchor: [49, 57], elbow: [24, 48], labelPosition: [7, 48], align: 'left' },
+      { code: 'OU-03', label: 'PIVOT CIRCLE', detail: 'Rotation release zone', anchor: [64, 65], elbow: [78, 76], labelPosition: [92, 76], align: 'right' },
+    ],
+  },
+  {
+    id: 'toe-spring',
+    name: 'Low toe spring',
+    eyebrow: 'NATURAL FOREFOOT',
+    title: '과도하게 굴리지 않는 자연스러운 전족부.',
+    body: '앞쪽 곡률을 낮춰 발가락 아래의 접지 시간을 길게 가져갑니다. 걷는 동안은 자연스럽게, 코트에서는 빠르게 힘을 전달합니다.',
+    video: assetPath('processed/video/toe-spring.mp4'),
+    poster: assetPath('processed/images/toe-spring-poster.webp'),
+    position: 'right-top',
+    objectPosition: '42% center',
+    specs: ['Low toe spring', 'Long forefoot contact', 'Natural flex point'],
+    annotations: [
+      { code: 'TF-01', label: 'LOW TOE SPRING', detail: 'Natural forefoot angle', anchor: [40, 74], elbow: [24, 81], labelPosition: [7, 81], align: 'left' },
+      { code: 'TF-02', label: 'CONTACT LINE', detail: 'Extended ground feel', anchor: [55, 79], elbow: [77, 82], labelPosition: [92, 82], align: 'right' },
+      { code: 'TF-03', label: 'FLEX POINT', detail: 'Guided toe-off motion', anchor: [51, 66], elbow: [74, 52], labelPosition: [92, 52], align: 'right' },
+    ],
+  },
+];
