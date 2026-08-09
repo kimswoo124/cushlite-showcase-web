@@ -429,7 +429,7 @@ function Navigation({ activeIndex }) {
             </a>
           ))}
         </nav>
-        <a className="nav-price" href="#comparison">₩169,000</a>
+        <a className="nav-price" href="#comparison">₩159,000</a>
       </header>
     </>
   );
@@ -459,7 +459,7 @@ function Hero() {
         </div>
         <aside className="hero-price scene-reveal">
           <span>제안 소비자가</span>
-          <strong>₩169,000</strong>
+          <strong>₩159,000</strong>
           <p>출시 전 편집용 임시 가격</p>
         </aside>
       </div>

@@ -15,7 +15,7 @@ export const priceBenchmarks = [
   {
     brand: 'SERGIO TACCHINI',
     model: 'CUSHLITE 302',
-    price: '₩169,000',
+    price: '₩159,000',
     priceStatus: '출시 전 임시 소비자가',
     role: '데일리 루틴 / 코트',
     featured: true,

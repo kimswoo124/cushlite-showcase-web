@@ -47,7 +47,7 @@ function Navigation({ progress }) {
         </nav>
 
         <div className="nav-actions">
-          <a className="nav-price" href="#price">₩189,000</a>
+          <a className="nav-price" href="#price">₩179,000</a>
         </div>
       </header>
     </>
@@ -87,7 +87,7 @@ function Hero() {
 
         <div className="hero-price-panel" aria-live="polite">
           <span>제안 소비자가</span>
-          <strong>₩189,000</strong>
+          <strong>₩179,000</strong>
           <p>동급 퍼포먼스 코트화 기준의 편집용 임시 가격</p>
           <a href="#price">
             가격대 비교 <ArrowRight size={17} />

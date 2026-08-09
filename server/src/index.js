@@ -17,6 +17,7 @@ const app = express();
 app.disable('x-powered-by');
 
 const PRODUCTS = new Set(['302', '702']);
+const SHOWCASES = ['302', '702', 'lineup'];
 
 // 미디어 경로 화이트리스트 — 경로 조작(../)과 임의 키 서명 요청을 원천 차단한다.
 // video/ 와 images/ 아래만 허용하고, 각 세그먼트는 영숫자로 시작해야 한다
@@ -118,8 +119,8 @@ app.get('/api/media/:product/*', async (req, res) => {
 });
 
 // 각 쇼케이스의 빌드 산출물을 서브경로로 서빙한다.
-for (const product of PRODUCTS) {
-  app.use(`/${product}`, express.static(path.join(projectRoot, `client-${product}/dist`), {
+for (const showcase of SHOWCASES) {
+  app.use(`/${showcase}`, express.static(path.join(projectRoot, `client-${showcase}/dist`), {
     index: 'index.html',
     setHeaders: (res, filePath) => {
       if (filePath.endsWith('.html')) res.setHeader('Cache-Control', 'no-cache');
@@ -130,7 +131,7 @@ for (const product of PRODUCTS) {
 app.get('/', (_req, res) => res.redirect(302, '302/'));
 
 app.use((req, res) => {
-  const match = req.path.match(/^\/(302|702)\//);
+  const match = req.path.match(/^\/(302|702|lineup)\//);
   if (match) {
     return res.sendFile(path.join(projectRoot, `client-${match[1]}/dist/index.html`));
   }

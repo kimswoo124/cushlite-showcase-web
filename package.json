@@ -6,10 +6,11 @@
   "workspaces": [
     "client-302",
     "client-702",
+    "client-lineup",
     "server"
   ],
   "scripts": {
-    "build": "npm run build -w client-302 && npm run build -w client-702",
+    "build": "npm run build -w client-302 && npm run build -w client-702 && npm run build -w client-lineup",
     "start": "node server/src/index.js",
     "dev:server": "node --watch server/src/index.js",
     "media:upload": "node scripts/upload-media.mjs",

@@ -15,7 +15,7 @@ export const priceBenchmarks = [
   {
     brand: 'SERGIO TACCHINI',
     model: 'CUSHLITE 702',
-    price: '₩189,000',
+    price: '₩179,000',
     priceDelta: 'BALANCED ROUTINE',
     segment: '쿠션·안정 균형형',
     functions: ['듀얼 존 CMEVA', '중족부 브리지', '온코트 ↔ 데일리 연속성'],
@@ -160,22 +160,22 @@ export const features = [
   },
   {
     id: 'arch',
-    name: 'Midfoot chassis',
+    name: 'Arch support bridge',
     korean: '움직임은 나누고, 중심의 균형은 이어가도록.',
     body:
-      '아웃솔과 미드솔 사이의 중족부 브리지가 앞뒤 구획을 연결합니다. 착지에서는 비틀림을 지지하고, 다음 스텝에서는 전족부의 굴곡이 자연스럽게 이어지도록 구성했습니다.',
-    specs: ['Midfoot support bridge', 'Split flex geometry', 'Torsion control chassis'],
+      '아웃솔과 미드솔 사이, 아치 아래에 배치한 사출형 브리지가 앞뒤 구획을 연결합니다. 아치 하부를 받치며 착지 때 중족부 비틀림을 줄이고, 다음 스텝에서는 전족부 굴곡이 자연스럽게 이어지도록 구성했습니다.',
+    specs: ['Injected arch support', 'Split flex geometry', 'Torsion guidance'],
     mediaType: 'video',
     media: assetPath('assets/video/arch-exploded.mp4'),
     poster: assetPath('assets/images/arch-exploded-poster.jpg'),
     fallback: assetPath('assets/images/arch-exploded-poster.jpg'),
-    mediaAlt: '중족부 브리지와 아웃솔 구조를 분리해 보여주는 테니스화 영상',
+    mediaAlt: '아치 아래 사출 브리지와 아웃솔 구조를 분리해 보여주는 테니스화 영상',
     tone: 'deep',
     annotations: [
       {
         code: 'AR-01',
-        label: 'MIDFOOT BRIDGE',
-        detail: 'Torsion control chassis',
+        label: 'INJECTED ARCH BRIDGE',
+        detail: 'Under-arch torsion support',
         anchor: [49, 56],
         elbow: [26, 65],
         labelPosition: [7, 65],
