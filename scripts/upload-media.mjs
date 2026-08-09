@@ -12,6 +12,7 @@ const FORCE = process.argv.includes('--force');
 const PRODUCTS = ['302', '702'];
 const MEDIA_DIR = path.resolve('media-source');
 const ASSET_PATH_CALL = /assetPath\(\s*['"`]([^'"`]+)['"`]\s*\)/g;
+const LINEUP_CLIP_CALL = /clip\(\s*['"`](302|702)['"`]\s*,\s*['"`]([^'"`]+)['"`]\s*,\s*['"`]([^'"`]+)['"`]/g;
 
 const CONTENT_TYPES = {
   '.mp4': 'video/mp4',
@@ -45,11 +46,21 @@ const missing = [];
 
 for (const product of PRODUCTS) {
   const referenced = new Set();
-  for (const file of await collectSources(path.resolve(`client-${product}/src`))) {
+  const sourceFiles = [
+    ...await collectSources(path.resolve(`client-${product}/src`)),
+    ...await collectSources(path.resolve('client-lineup/src')),
+  ];
+  for (const file of sourceFiles) {
     const source = await readFile(file, 'utf8');
     for (const match of source.matchAll(ASSET_PATH_CALL)) {
       const media = match[1].match(/(?:^|\/)((?:video|images)\/.+)$/);
       if (media) referenced.add(media[1]);
+    }
+    for (const match of source.matchAll(LINEUP_CLIP_CALL)) {
+      if (match[1] === product) {
+        referenced.add(`video/${match[2]}`);
+        referenced.add(`images/${match[3]}`);
+      }
     }
   }
 
