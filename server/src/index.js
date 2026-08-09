@@ -128,7 +128,9 @@ for (const showcase of SHOWCASES) {
   }));
 }
 
-app.get('/', (_req, res) => res.redirect(302, '302/'));
+// 대시보드 기본 진입은 302·702 통합 라인업으로 연결한다.
+// 개별 제품 페이지는 /302/, /702/ 경로를 그대로 유지한다.
+app.get('/', (_req, res) => res.redirect(302, 'lineup/'));
 
 app.use((req, res) => {
   const match = req.path.match(/^\/(302|702|lineup)\//);
