@@ -7,13 +7,17 @@
     "client-302",
     "client-702",
     "client-lineup",
+    "client-lowprofile",
     "server"
   ],
   "scripts": {
-    "build": "npm run build -w client-302 && npm run build -w client-702 && npm run build -w client-lineup",
+    "build": "npm run build -w client-302 && npm run build -w client-702 && npm run build -w client-lineup && npm run build -w client-lowprofile",
     "start": "node server/src/index.js",
+    "dev:local": "MEDIA_LOCAL_DIR=$PWD/media-source node server/src/index.js",
+    "dev:local:watch": "MEDIA_LOCAL_DIR=$PWD/media-source node --watch server/src/index.js",
     "dev:server": "node --watch server/src/index.js",
     "media:upload": "node scripts/upload-media.mjs",
-    "media:verify": "node scripts/verify-media.mjs"
+    "media:verify": "node scripts/verify-media.mjs",
+    "media:verify:local": "VERIFY_BASE_URL=http://localhost:3000 node scripts/verify-media.mjs"
   }
 }

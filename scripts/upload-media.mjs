@@ -9,7 +9,7 @@ import path from 'node:path';
 import { listObjects, uploadObject } from '../server/src/s3.js';
 
 const FORCE = process.argv.includes('--force');
-const PRODUCTS = ['302', '702'];
+const PRODUCTS = ['302', '702', 'lowprofile'];
 const MEDIA_DIR = path.resolve('media-source');
 const ASSET_PATH_CALL = /assetPath\(\s*['"`]([^'"`]+)['"`]\s*\)/g;
 const LINEUP_CLIP_CALL = /clip\(\s*['"`](302|702)['"`]\s*,\s*['"`]([^'"`]+)['"`]\s*,\s*['"`]([^'"`]+)['"`]/g;

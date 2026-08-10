@@ -16,8 +16,11 @@ const PORT = process.env.PORT || 3000;
 const app = express();
 app.disable('x-powered-by');
 
-const PRODUCTS = new Set(['302', '702']);
-const SHOWCASES = ['302', '702', 'lineup'];
+const PRODUCTS = new Set(['302', '702', 'lowprofile']);
+const SHOWCASES = ['302', '702', 'lineup', 'lowprofile'];
+const DEFAULT_SHOWCASE = SHOWCASES.includes(process.env.DEFAULT_SHOWCASE)
+  ? process.env.DEFAULT_SHOWCASE
+  : 'lineup';
 
 // 미디어 경로 화이트리스트 — 경로 조작(../)과 임의 키 서명 요청을 원천 차단한다.
 // video/ 와 images/ 아래만 허용하고, 각 세그먼트는 영숫자로 시작해야 한다
@@ -128,12 +131,12 @@ for (const showcase of SHOWCASES) {
   }));
 }
 
-// 대시보드 기본 진입은 302·702 통합 라인업으로 연결한다.
-// 개별 제품 페이지는 /302/, /702/ 경로를 그대로 유지한다.
-app.get('/', (_req, res) => res.redirect(302, 'lineup/'));
+// 기본은 통합 라인업이며, 별도 앱 배포 시 환경변수로 지정한 쇼케이스만
+// 첫 화면으로 연결한다. 기존 개별 경로는 그대로 유지한다.
+app.get('/', (_req, res) => res.redirect(302, `${DEFAULT_SHOWCASE}/`));
 
 app.use((req, res) => {
-  const match = req.path.match(/^\/(302|702|lineup)\//);
+  const match = req.path.match(/^\/(302|702|lineup|lowprofile)\//);
   if (match) {
     return res.sendFile(path.join(projectRoot, `client-${match[1]}/dist/index.html`));
   }
@@ -141,5 +144,5 @@ app.use((req, res) => {
 });
 
 app.listen(PORT, '0.0.0.0', () => {
-  console.log(`CUSHLITE showcase server listening on ${PORT}`);
+  console.log(`CUSHLITE showcase server listening on ${PORT} · default=${DEFAULT_SHOWCASE}`);
 });

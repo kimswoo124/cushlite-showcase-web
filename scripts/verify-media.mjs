@@ -8,11 +8,13 @@ import { readdir, readFile } from 'node:fs/promises';
 import path from 'node:path';
 
 const BASE_URL = (process.argv[2] || process.env.VERIFY_BASE_URL || 'http://localhost:3311').replace(/\/$/, '');
-const PRODUCTS = ['302', '702'];
+const PRODUCTS = ['302', '702', 'lowprofile'];
 
 // assetPath() 는 URL 을 런타임에 조합하므로 빌드 산출물에는 완전한 경로가 남지 않는다.
 // 따라서 소스의 assetPath('...') 인자를 읽어 실제 요청될 URL 을 그대로 재구성한다.
 const ASSET_PATH_CALL = /assetPath\(\s*['"`]([^'"`]+)['"`]\s*\)/g;
+const LINEUP_MEDIA_PATH_CALL = /mediaPath\(\s*['"`](302|702)['"`]\s*,\s*['"`](video|images)['"`]\s*,\s*['"`]([^'"`]+)['"`]\s*\)/g;
+const LINEUP_CLIP_CALL = /clip\(\s*['"`](302|702)['"`]\s*,\s*['"`]([^'"`]+)['"`]\s*,\s*['"`]([^'"`]+)['"`]/g;
 
 // assetPath 인자 → 브라우저가 실제로 요청하는 URL
 const toRequestUrl = (product, assetArg) => {
@@ -23,9 +25,9 @@ const toRequestUrl = (product, assetArg) => {
 
 // dist 안에 리터럴로 박혀 있는 경로(HTML/CSS 등)는 별도로 훑는다.
 const REFERENCE_PATTERNS = [
-  /["'`](\/api\/media\/(?:302|702)\/[a-z0-9-]+\.mp4)["'`]/g,
-  /["'`](\/(?:302|702)\/[^"'`\s)]+\.(?:webp|jpg|jpeg|png|svg|woff2|mp4))["'`]/g,
-  /url\((?:"|')?(\/(?:302|702)\/[^)'"\s]+\.(?:webp|jpg|jpeg|png|svg|woff2))(?:"|')?\)/g,
+  /["'`](\/api\/media\/(?:302|702|lowprofile)\/[a-z0-9-]+\.mp4)["'`]/g,
+  /["'`](\/(?:302|702|lowprofile)\/[^"'`\s)]+\.(?:webp|jpg|jpeg|png|svg|woff2|mp4))["'`]/g,
+  /url\((?:"|')?(\/(?:302|702|lowprofile)\/[^)'"\s]+\.(?:webp|jpg|jpeg|png|svg|woff2))(?:"|')?\)/g,
 ];
 
 const collectFiles = async (dir, filter = /\.(js|css|html)$/) => {
@@ -60,8 +62,21 @@ for (const product of PRODUCTS) {
   }
 }
 
+// 통합 라인업은 mediaPath()/clip()으로 URL을 조합하므로 별도 수집한다.
+for (const file of await collectFiles(path.resolve('client-lineup/src'), /\.(js|jsx)$/)) {
+  const source = await readFile(file, 'utf8');
+  for (const match of source.matchAll(LINEUP_MEDIA_PATH_CALL)) {
+    references.add(`/api/media/${match[1]}/${match[2]}/${match[3]}`);
+  }
+  for (const match of source.matchAll(LINEUP_CLIP_CALL)) {
+    references.add(`/api/media/${match[1]}/video/${match[2]}`);
+    references.add(`/api/media/${match[1]}/images/${match[3]}`);
+  }
+}
+
 // 앱 간 이동 링크(스위처)도 검증 대상에 넣는다.
 for (const product of PRODUCTS) references.add(`/${product}/`);
+references.add('/lineup/');
 
 // 배포 주소를 소스에 하드코딩하면 주소가 바뀔 때 조용히 죽는다 — 있으면 실패시킨다.
 const hardcoded = [];

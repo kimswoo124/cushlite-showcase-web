@@ -1,0 +1,12 @@
+{
+  "slug": "sergio-tacchini-lowprofile-showcase",
+  "displayName": "Sergio Tacchini | Low Profile",
+  "github": "kimswoo124/cushlite-showcase-web",
+  "runtime": "node",
+  "start": "npm start",
+  "branch": "main",
+  "port": 3000,
+  "env": {
+    "DEFAULT_SHOWCASE": "lowprofile"
+  }
+}
