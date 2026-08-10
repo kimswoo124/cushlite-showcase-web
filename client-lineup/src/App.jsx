@@ -728,22 +728,22 @@ function PriceSection() {
     ['support', '측면 안정'],
     ['durability', '내구 설계'],
   ];
-  const brandGroups = ['ON', 'ASICS', 'ADIDAS'].map((brand) => ({
+  const marketItemsSorted = [...competitors].sort((a, b) => a.priceValue - b.priceValue);
+  const brandGroups = [...new Set(competitors.map((item) => item.brand))].map((brand) => ({
     brand,
     items: competitors.filter((item) => item.brand === brand),
   }));
-  const marketItemsSorted = [...competitors].sort((a, b) => a.priceValue - b.priceValue);
   const sergioMatrixProducts = [
     {
       brand: 'SERGIO TACCHINI',
       model: 'CUSHLITE 302',
-      price: '₩159,000',
+      price: '₩169,000',
       emphasis: ['daily', 'multi', 'cushion', 'support'],
       emphasisLabels: {
         daily: '데일리 착화',
         multi: '낮은 토 스프링',
         cushion: '미드솔 쿠션',
-        support: '와이드 플랫폼',
+        support: '힐 지지 프레임',
       },
       signature: '일상 연속성 · 자연스러운 전족부 · 넓은 플랫폼',
       image: priceCards[0].image,
@@ -753,14 +753,13 @@ function PriceSection() {
     {
       brand: 'SERGIO TACCHINI',
       model: 'CUSHLITE 702',
-      price: '₩179,000',
-      emphasis: ['daily', 'multi', 'cushion', 'support', 'durability'],
+      price: '₩189,000',
+      emphasis: ['daily', 'multi', 'cushion', 'support'],
       emphasisLabels: {
         daily: '데일리 착화',
         multi: '파동형 러그',
-        cushion: '듀얼 존 CMEVA',
+        cushion: '미드솔 쿠션',
         support: '아치 서포트',
-        durability: '러버 아웃솔',
       },
       signature: '아치 하부 지지 · 반복 착지 · 방향 전환',
       image: priceCards[1].image,
@@ -771,13 +770,13 @@ function PriceSection() {
   const matrixProducts = [...sergioMatrixProducts, ...competitors];
   const positionProducts = [
     {
-      brand: 'SERGIO TACCHINI', brandKey: 'sergio-302', model: 'CUSHLITE 302', price: '₩159,000',
-      priceValue: 159000, tiers: ['daily', 'crossover'], tierOrder: { daily: 0, crossover: 0 },
+      brand: 'SERGIO TACCHINI', brandKey: 'sergio-302', model: 'CUSHLITE 302', price: '₩169,000',
+      priceValue: 169000, tiers: ['daily', 'crossover'], tierOrder: { daily: 0, crossover: 0 },
       image: priceCards[0].image, source: '/302/', house: '302',
     },
     {
-      brand: 'SERGIO TACCHINI', brandKey: 'sergio-702', model: 'CUSHLITE 702', price: '₩179,000',
-      priceValue: 179000, tiers: ['crossover', 'stability'], tierOrder: { crossover: 1, stability: 1 },
+      brand: 'SERGIO TACCHINI', brandKey: 'sergio-702', model: 'CUSHLITE 702', price: '₩189,000',
+      priceValue: 189000, tiers: ['crossover', 'stability'], tierOrder: { crossover: 1, stability: 1 },
       image: priceCards[1].image, source: '/702/', house: '702',
     },
     ...competitors,
@@ -922,7 +921,7 @@ function PriceSection() {
           >
             <header>
               <div><small>PRICE SPECTRUM</small><h4>₩149K — ₩259K</h4></div>
-              <span>CUSHLITE 302 · 159K &nbsp; / &nbsp; 702 · 179K</span>
+              <span>CUSHLITE 302 · 169K &nbsp; / &nbsp; 702 · 189K</span>
             </header>
             <div className="spectrum-track">
               <div className="spectrum-axis" />
@@ -937,7 +936,7 @@ function PriceSection() {
                   href={item.source}
                   target="_blank"
                   rel="noreferrer"
-                  style={{ left: pricePosition(item.priceValue), '--dot-row': index % 3 }}
+                  style={{ left: pricePosition(item.priceValue), '--dot-row': index % 7 }}
                   key={`${item.model}-dot`}
                   aria-label={`${item.brand} ${item.model} ${item.price}`}
                   onPointerEnter={() => setHoveredSpectrumItem(item)}
@@ -949,8 +948,8 @@ function PriceSection() {
                   <strong>{item.model.replace('THE ROGER ', '').replace('Adizero ', '')}</strong>
                 </a>
               ))}
-              <span className="sergio-reference ref-302" style={{ left: pricePosition(159000) }}>302 · 159K</span>
-              <span className="sergio-reference ref-702" style={{ left: pricePosition(179000) }}>702 · 179K</span>
+              <span className="sergio-reference ref-302" style={{ left: pricePosition(169000) }}>302 · 169K</span>
+              <span className="sergio-reference ref-702" style={{ left: pricePosition(189000) }}>702 · 189K</span>
             </div>
             <div
               className={`spectrum-hover-preview ${hoveredSpectrumItem ? 'is-visible' : ''}`}
@@ -1048,7 +1047,7 @@ function PriceSection() {
             <div>
               <small>COMPETITOR FEATURE READ</small>
               <h4>경쟁사 핵심 기능</h4>
-              <p className="matrix-intro">각 브랜드가 공식 제품 설명에서 앞세운 기술과 구조를 비교합니다.</p>
+              <p className="matrix-intro">각 브랜드가 공식 제품 설명에서 앞세운 기술과 구조를 비교합니다. 경쟁 모델의 핵심 키워드도 기본 상태에서 함께 표시합니다.</p>
             </div>
             <div className="matrix-legend">
               <span><i className="legend-emphasized" />기술·구조 키워드</span>
@@ -1072,66 +1071,67 @@ function PriceSection() {
               </a>
             ))}
           </div>
-          <div className="matrix-grid">
-            <div className="matrix-head">
-              <div className="matrix-corner">브랜드 / 모델 / 정상가</div>
-              {featureColumns.map(([, label], index) => (
-                <div className="matrix-column" key={label}><span>{String(index + 1).padStart(2, '0')}</span>{label}</div>
-              ))}
-            </div>
-            {matrixProducts.map((item) => (
-              <div className={`matrix-row ${item.house ? `is-house row-${item.house}` : ''}`} key={`${item.model}-matrix`}>
-                <a className="matrix-product-cell" href={item.source} target={item.house ? undefined : '_blank'} rel={item.house ? undefined : 'noreferrer'}>
-                  <span className="matrix-product-image">
-                    <img src={item.image} alt={`${item.brand} ${item.model}`} loading="lazy" />
-                    {!item.house && <i className={`matrix-brand-token brand-${item.brandKey}`}>{item.brand.slice(0, 2)}</i>}
-                  </span>
-                  <span className="matrix-product-name"><small>{item.brand}</small><strong>{item.model}</strong><em>{item.price}</em></span>
-                </a>
-                {featureColumns.map(([key, label]) => (
-                  <span
-                    className={`matrix-feature-cell ${item.emphasis.includes(key) ? 'is-emphasized' : ''}`}
-                    key={`${item.model}-${label}`}
-                    title={`${label}: ${item.emphasis.includes(key) ? (item.house ? 'CUSHLITE 내부 기획·구조 기준' : '브랜드 공식 제품 설명 기준') : '우선 표기 없음'}`}
-                  >
-                    <i />
-                    <small>{item.emphasis.includes(key) ? item.emphasisLabels?.[key] : '—'}</small>
-                  </span>
+          <div className="matrix-scroll-shell" tabIndex="0" aria-label="경쟁사 핵심 기능 비교표">
+            <div className="matrix-grid">
+              <div className="matrix-head">
+                <div className="matrix-corner">브랜드 / 모델 / 정상가</div>
+                {featureColumns.map(([, label], index) => (
+                  <div className="matrix-column" key={label}><span>{String(index + 1).padStart(2, '0')}</span>{label}</div>
                 ))}
               </div>
-            ))}
+              {matrixProducts.map((item) => (
+                <div className={`matrix-row ${item.house ? `is-house row-${item.house}` : 'is-competitor'}`} key={`${item.model}-matrix`}>
+                  <a className="matrix-product-cell" href={item.source} target={item.house ? undefined : '_blank'} rel={item.house ? undefined : 'noreferrer'}>
+                    <span className="matrix-product-image">
+                      <img src={item.image} alt={`${item.brand} ${item.model}`} loading="lazy" />
+                      {!item.house && <i className={`matrix-brand-token brand-${item.brandKey}`}>{item.brand.slice(0, 2)}</i>}
+                    </span>
+                    <span className="matrix-product-name"><small>{item.brand}</small><strong>{item.model}</strong><em>{item.price}</em></span>
+                  </a>
+                  {featureColumns.map(([key, label]) => (
+                    <span
+                      className={`matrix-feature-cell ${item.emphasis.includes(key) ? 'is-emphasized' : ''}`}
+                      key={`${item.model}-${label}`}
+                      title={`${label}: ${item.emphasis.includes(key) ? (item.house ? 'CUSHLITE 내부 기획·구조 기준' : '브랜드 공식 제품 설명 기준') : '우선 표기 없음'}`}
+                    >
+                      <i />
+                      <small>{item.emphasis.includes(key) ? item.emphasisLabels?.[key] : '—'}</small>
+                    </span>
+                  ))}
+                </div>
+              ))}
+            </div>
           </div>
           <p className="matrix-note"><strong>표 읽는 법</strong><span>채워진 원과 키워드는 해당 항목에 대응하는 대표 기술 또는 구조입니다. 빈 원은 기능 부재가 아니라 우선 표기가 없다는 뜻입니다. 경쟁 모델은 브랜드 공식 제품 설명 기준이며, CUSHLITE는 현재 내부 제품 기획·구조 기준입니다.</span></p>
         </article>
 
         <div className="competitor-catalog" data-market-reveal>
-          {brandGroups.map((group) => (
-            <section className={`brand-cluster brand-cluster-${group.brand.toLowerCase()}`} key={group.brand}>
-              <header><p>{group.brand}</p><span>{group.items.length} STYLES</span></header>
-              <div>
-                {group.items.map((item, index) => (
-                  <a className={`market-model-card card-variant-${index}`} href={item.source} target="_blank" rel="noreferrer" key={item.model}>
-                    <div className="market-model-visual">
-                      <div className="market-model-image"><img src={item.image} alt={`${item.brand} ${item.model}`} /></div>
-                      <DesignRating item={item} />
-                    </div>
-                    <div className="market-model-copy">
-                      <small>{item.role}</small>
-                      <h4>{item.model}</h4>
-                      <strong>{item.price}</strong>
-                      <p>{item.feature}</p>
-                      <ul>{item.technologies.map((tech) => <li key={tech}>{tech}</li>)}</ul>
-                    </div>
-                    <ArrowUpRight size={16} weight="bold" />
-                  </a>
-                ))}
-              </div>
-            </section>
-          ))}
+          <header className="competitor-catalog-heading">
+            <div><p>SELECTED COMPETITOR MODELS</p><h3>브랜드별 대표 설계를 같은 기준으로.</h3></div>
+            <span>{competitors.length} MODELS · {new Set(competitors.map((item) => item.brand)).size} BRANDS</span>
+          </header>
+          <div className="competitor-catalog-grid">
+            {competitors.map((item) => (
+              <a className="market-model-card" href={item.source} target="_blank" rel="noreferrer" key={item.model}>
+                <div className="market-model-brandline"><strong>{item.brand}</strong><span>{item.role}</span></div>
+                <div className="market-model-visual">
+                  <div className="market-model-image"><img src={item.image} alt={`${item.brand} ${item.model}`} /></div>
+                  <DesignRating item={item} />
+                </div>
+                <div className="market-model-copy">
+                  <h4>{item.model}</h4>
+                  <strong>{item.price}</strong>
+                  <p>{item.feature}</p>
+                  <ul>{item.technologies.map((tech) => <li key={tech}>{tech}</li>)}</ul>
+                </div>
+                <ArrowUpRight size={16} weight="bold" />
+              </a>
+            ))}
+          </div>
         </div>
         <p className="rating-method-note"><strong>설계 강조도 읽는 법</strong><span>각 수치는 실험실 성능 점수가 아니라 공식 제품 설명에서 반복적으로 강조한 용도와 기능을 0–100 범위로 환산한 상대 지표입니다. 마우스를 그래프의 각 방향으로 움직이면 해당 축을 자세히 볼 수 있습니다.</span></p>
       </div>
-      <p className="price-disclaimer">경쟁사 가격은 2026년 8월 7일 한국 공식 온라인 스토어 정상가 기준입니다. 프로모션 가격은 제외했으며 색상·재고에 따라 변동될 수 있습니다. 기술 비교는 각 브랜드가 공개한 설명을 요약했으며, 직접 착화 시험이나 성능 우열 평가가 아닙니다.</p>
+      <p className="price-disclaimer">경쟁사 가격은 2026년 8월 10일 한국 공식 온라인 스토어 정상가 기준입니다. 프로모션 가격은 제외했으며 색상·재고에 따라 변동될 수 있습니다. 기술 비교는 각 브랜드가 공개한 설명을 요약했으며, 직접 착화 시험이나 성능 우열 평가가 아닙니다.</p>
     </section>
   );
 }
