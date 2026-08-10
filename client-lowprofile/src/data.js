@@ -1,4 +1,5 @@
-export const assetPath = (path) => `/api/media/lowprofile/${path}`;
+const MEDIA_ORIGIN = (import.meta.env.VITE_MEDIA_ORIGIN || '').replace(/\/$/, '');
+export const assetPath = (path) => `${MEDIA_ORIGIN}/api/media/lowprofile/${path}`;
 
 /**
  * @typedef {Object} ProductColorway
