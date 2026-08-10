@@ -1,6 +1,7 @@
 node_modules/
 dist/
 dist-dcs/
+dist-dcs-single/
 .env
 .env.local
 .DS_Store

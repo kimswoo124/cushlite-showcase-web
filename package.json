@@ -18,6 +18,7 @@
     "dev:server": "node --watch server/src/index.js",
     "media:upload": "node scripts/upload-media.mjs",
     "media:verify": "node scripts/verify-media.mjs",
-    "media:verify:local": "VERIFY_BASE_URL=http://localhost:3000 node scripts/verify-media.mjs"
+    "media:verify:local": "VERIFY_BASE_URL=http://localhost:3000 node scripts/verify-media.mjs",
+    "build:lowprofile:dashboard": "VITE_DEPLOY_TARGET=dashboard npm run build -w client-lowprofile && node scripts/build-lowprofile-dashboard.mjs"
   }
 }
